@@ -1,0 +1,13 @@
+.wrapper {
+    width: 100%;
+    height: 100%;
+}
+.wrapper-remove {
+    
+}
+.menu {
+    margin-left: -999px;
+}
+body {
+    background-color:aliceblue;
+}

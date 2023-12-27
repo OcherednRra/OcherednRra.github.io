@@ -1,31 +1,148 @@
 <!doctype html>
-<html lang="en" ng-app="NarrowItDownApp">
-  <head>
-    <title>Narrow Down Your Menu Choice</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/styles.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="app.js"></script>
-  </head>
-<body>
-   <div class="container" ng-controller="NarrowItDownController">
-    <h1>Narrow Down Your Chinese Menu Choice</h1>
-
-    <div class="form-group">
-      <input type="text" placeholder="search term" class="form-control" ng-model="searchTerm">
-    </div>
-    <div class="form-group narrow-button">
-      <button class="btn btn-primary" ng-click="narrowItDown()">Narrow It Down For Me!</button>
-    </div>
-
-    <div ng-repeat="item in foundItems">
-      <p>{{item.name}}, {{item.short_name}}, {{item.description}}</p>
-      <button ng-click="removeItem($index)">Don't want this one!</button>
-    </div>
-
-    <p ng-if="foundItems.length === 0">Nothing found</p>
-  </div>
-
-</body>
+<html>
+    <head>
+        <title>Mehari Belayneh Full stack web developer</title>
+        <meta name="viewport" content="width=device-width">
+        <meta charset="utf-8">
+        <meta author="mehari" email="meharib82@gmail.com">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/fa/css/all.css">
+    </head>
+    <body>
+        <div class="container" id="app">
+            <div class="wrapper" :class="{'wrapper-remove': done}">
+<!--                -->
+                <div class="menu" :class="{'menu-full': done,removeMenu: toggleSide}">
+                    <div class="me">
+                        <span class="name">{{name}}</span><br>
+                        <span>BSc Mechanical Engineering and computer programmer</span>
+                        <img src="assets/me.jpg" id="menu-img"/>
+                    </div>
+                    <div class="btns">
+                        <button class="menu-btn action-btn" @click="start">Start<i class="fa fa-cog" :class="{'fa-spin': !done}"></i></button>
+                        <button class="menu-btn" :class="{active: profile}" @click="showProfile"><i class="fa fa-user-circle"></i>Profile </button>
+                        <button class="menu-btn" :class="{active: education}" @click="showEducation"><i class="fa fa-book"></i>Education </button>
+                        <button class="menu-btn" :class="{active: skill }" @click="showSkill"><i class="fa fa-cogs"></i>Skill</button>
+                        <button class="menu-btn" :class="{active: contact}"@click="showContact"><i class="fa fa-address-book"></i>Contact</button>                       
+                        <button class="menu-btn action-btn" @click="doneShow">Done</button>                       
+                    </div>
+                </div>
+<!--                -->
+                <div class="detail-wrapper" :class="{'detail-wraper-remove': done , 'wrapper-duration': changeColor}" id="detail-wrapper">
+                   <div class="header" :class="{rotate: loading}">
+                        <button class="toggle" :class="{displyNone: !toggleSide }" @click="toggle"><i class="fa fa-bars"></i></button>
+                       {{ title }}
+                    </div>
+                    <div class="detail">
+<!--                        skill-->
+                        <transition name="skill">
+                            <div class="skill " v-if="skill">
+                                
+                                <transition name="php">
+                                    <div class="php profile" v-if="skills">
+                                        php/Laravel<br>
+                                        <i class="fab fa-laravel fa-3x"></i>
+                                        <div class="level">{{laravel_level}}%</div>
+                                        <div class="progress-php progress"></div>
+                                    </div>
+                                </transition>
+                                
+                                <transition name="sql">
+                                    <div class="sql profile" v-if="skills">
+                                        MySql<br>
+                                        <i class="fa fa-database fa-3x"></i>
+                                        <div class="level">{{sql_level}}%</div>
+                                        <div class="progress-sql progress"></div>
+                                    </div>
+                                </transition>
+                                    
+                                <transition name="vue">
+                                    <div class="vue profile" v-if="skills">
+                                        js/vue/Jquery<br>
+                                        <i class="fab fa-vuejs fa-3x"></i><i class="fa fa-jquery"></i>
+                                        <div class="level">{{js_level}}%</div>
+                                        <div class="progress-vue progress"></div>
+                                    </div>
+                                </transition>
+                                    
+                                <transition name="css">
+                                    <div class="css profile" v-if="skills">
+                                        CSS3<br>
+                                        <i class="fab fa-css3 fa-3x"></i>
+                                        <div class="level">{{css_level}}%</div>
+                                        <div class="progress-css progress" ></div>
+                                    </div>
+                                </transition>
+                                    
+                                <transition name="html">
+                                    <div class="html profile" v-if="skills">
+                                        html<br>
+                                        <i class="fab fa-html5 fa-3x"></i>
+                                        <div class="level">{{html_level}}%</div>
+                                        <div class="progress-html progress"></div>
+                                    </div>
+                                </transition>
+                            </div>
+                        </transition>
+<!--                        skill end-->
+<!--                        profile -->
+                        <transition name="profile">
+                            <div class="profile" v-if="profile">
+                                <img src="assets/me.jpg" class="profile-img"/>
+                                <div class="about">
+                                    <p id="name">{{name}}<br>
+                                    <span>BSC Degree Mechanical Engineering from Arbaminch university institute of technology and Feelancer Web developer and programmer</span>
+                                    </p>
+                                    <p>Full stack web developer and multi skilled creative programmer
+                                         descover about him.
+                                    </p>
+                                </div>
+                            </div>
+                        </transition>
+                        
+                        <transition name="profile">
+                            <div class="profile" v-if="profile">
+                                <p><strong>Name:</strong>{{name}}</p>
+                                <!--<p><strong>BirthDay:</strong> 11/01/1996</p>-->
+                                <p><strong>Address:</strong> Bisoftu Ethiopia</p>
+                                <p><strong>Email:</strong> {{email}}</p>
+                            </div>
+                        </transition>
+<!--                        profile end-->
+                        
+<!--                        contact-->
+                        <transition name="contact">
+                            <div class="contact profile" v-if="contact">
+                                <div class="info">
+                                    <div class="form-title">INFO</div>
+                                    <p><strong>Name:</strong> {{name}}</p>
+                                    <p><strong>Email:</strong> {{email}}</p>
+                                    <p><strong>Phone: </strong> {{phone}}</p>
+                                </div>
+                                <form>
+                                    <div class="form-title">KEEP IN TOUCH</div>
+                                    <label for="name">Name</label>
+                                    <div><i class="fa fa-user"></i><input type="text"/></div>
+                                    <label for="email">Email</label>
+                                    <div><i class="fa fa-envelope"></i><input type="email"/></div>
+                                    <label for="textarea">Message</label>
+                                    <div><i class="fa fa-pen-fancy"></i><textarea></textarea></div>
+                                    <button>Send <i class="fa fa-paper-plane"></i></button>
+                                </form>
+                            </div><!-- contact-->
+                        </transition>
+                        
+                        <transition name="start">
+                            <div class="start" v-if="welcome">
+                                <h1>Welcome to my portfolio!</h1>
+                                <h1>Thanks for checking on me</h1>
+                            </div>
+                        </transition>
+                    </div> <!-- detail -->
+                </div><!-- detail wrapper -->
+            </div><!--wrapper -->
+        </div><!--container -->
+        <script src="js/vue.js"></script>
+        <script src="js/script.js"></script>
+    </body>
 </html>
